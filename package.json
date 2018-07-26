@@ -10,7 +10,6 @@
   "dependencies": {
     "@angular/common": "6.0.0",
     "@angular/compiler": "6.0.0",
-    "@angular/core": "6.0.0",
     "@angular/forms": "6.0.0",
     "@angular/platform-browser": "6.0.0",
     "@angular/platform-browser-dynamic": "6.0.0",
@@ -39,6 +38,7 @@
   "devDependencies": {
     "@angular/cli": "6.0.0",
     "@angular/compiler-cli": "6.0.0",
+    "@angular/core": "^6.0.9",
     "@ngtools/webpack": "6.0.0",
     "@types/jest": "22.2.3",
     "@types/node": "9.4.7",
@@ -67,9 +67,10 @@
     "merge-jsons-webpack-plugin": "1.0.14",
     "moment-locales-webpack-plugin": "1.0.5",
     "node-sass": "^4.9.0",
+    "popper.js": "^1.14.3",
     "postcss-loader": "2.1.1",
     "prettier": "1.11.1",
-    "protractor": "5.1.2",
+    "protractor": "^5.4.0",
     "protractor-jasmine2-screenshot-reporter": "0.4.0",
     "proxy-middleware": "0.15.0",
     "raw-loader": "0.5.1",
