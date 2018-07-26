@@ -54,7 +54,6 @@ entity Invoice {
     paymentMethod PaymentMethod required
     paymentDate Instant required
     paymentAmount BigDecimal required
-    code String required
 }
 enum InvoiceStatus {
 	PAID, ISSUED, CANCELLED
@@ -69,17 +68,17 @@ entity Shipment {
 }
 
 relationship OneToOne {
-    Customer{user(login) required} to User
+    Customer{user(login)} to User
 }
 relationship ManyToOne {
-    OrderItem{product(name) required} to Product
+    OrderItem{product(name)} to Product
 }
 
 relationship OneToMany {
-   Customer{order} to ProductOrder{customer(email) required},
-   ProductOrder{orderItem} to OrderItem{order(code) required},
-   ProductOrder{invoice} to Invoice{order(code) required},
-   Invoice{shipment} to Shipment{invoice(code) required},
+   Customer{order} to ProductOrder{customer(email)},
+   ProductOrder{orderItem} to OrderItem{order(code)},
+   ProductOrder{invoice} to Invoice{order(code)},
+   Invoice{shipment} to Shipment{invoice(code)},
    ProductCategory{product} to Product{productCategory(name)}
 }
 

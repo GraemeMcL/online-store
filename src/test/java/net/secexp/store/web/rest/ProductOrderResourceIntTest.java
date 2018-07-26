@@ -3,6 +3,7 @@ package net.secexp.store.web.rest;
 import net.secexp.store.StoreApp;
 
 import net.secexp.store.domain.ProductOrder;
+import net.secexp.store.domain.Customer;
 import net.secexp.store.repository.ProductOrderRepository;
 import net.secexp.store.service.ProductOrderService;
 import net.secexp.store.web.rest.errors.ExceptionTranslator;
@@ -98,6 +99,11 @@ public class ProductOrderResourceIntTest {
             .placedDate(DEFAULT_PLACED_DATE)
             .status(DEFAULT_STATUS)
             .code(DEFAULT_CODE);
+        // Add required entity
+        Customer customer = CustomerResourceIntTest.createEntity(em);
+        em.persist(customer);
+        em.flush();
+        productOrder.setCustomer(customer);
         return productOrder;
     }
 

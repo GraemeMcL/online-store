@@ -3,6 +3,7 @@ package net.secexp.store.web.rest;
 import net.secexp.store.StoreApp;
 
 import net.secexp.store.domain.Customer;
+import net.secexp.store.domain.User;
 import net.secexp.store.repository.CustomerRepository;
 import net.secexp.store.service.CustomerService;
 import net.secexp.store.web.rest.errors.ExceptionTranslator;
@@ -120,6 +121,11 @@ public class CustomerResourceIntTest {
             .addressLine2(DEFAULT_ADDRESS_LINE_2)
             .city(DEFAULT_CITY)
             .country(DEFAULT_COUNTRY);
+        // Add required entity
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        customer.setUser(user);
         return customer;
     }
 
