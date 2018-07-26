@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     success: any;
     eventSubscriber: Subscription;
     routeData: any;
+    filter: string;
     links: any;
     totalItems: any;
     queryCount: any;
