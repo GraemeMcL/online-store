@@ -1,8 +1,12 @@
 package net.secexp.store.repository;
 
 import net.secexp.store.domain.Shipment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 
 /**
@@ -12,4 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
 
+    Page<Shipment> findAllByInvoiceOrderCustomerUserLogin(String s, Pageable pageable);
+
+    Optional<Shipment> findOneByIdAndInvoiceOrderCustomerUserLogin(Long id, String s);
 }

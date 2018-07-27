@@ -1,5 +1,6 @@
 package net.secexp.store.service;
 
+import com.hazelcast.util.StringUtil;
 import net.secexp.store.domain.Authority;
 import net.secexp.store.domain.User;
 import net.secexp.store.repository.AuthorityRepository;
@@ -10,9 +11,11 @@ import net.secexp.store.security.SecurityUtils;
 import net.secexp.store.service.util.RandomUtil;
 import net.secexp.store.service.dto.UserDTO;
 
+import org.apache.commons.lang3.CharSequenceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
+import org.springframework.core.codec.CharSequenceEncoder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -133,10 +136,11 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
-        user.setPassword(encryptedPassword);
-        user.setResetKey(RandomUtil.generateResetKey());
-        user.setResetDate(Instant.now());
+//        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+//        user.setPassword(encryptedPassword);
+//        user.setResetKey(RandomUtil.generateResetKey());
+//        user.setResetDate(Instant.now());
+        user.setPassword(passwordEncoder.encode("user123"));
         user.setActivated(true);
         userRepository.save(user);
         this.clearUserCaches(user);

@@ -2,6 +2,8 @@ package net.secexp.store.service;
 
 import net.secexp.store.domain.Invoice;
 import net.secexp.store.repository.InvoiceRepository;
+import net.secexp.store.security.AuthoritiesConstants;
+import net.secexp.store.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +48,13 @@ public class InvoiceService {
     @Transactional(readOnly = true)
     public Page<Invoice> findAll(Pageable pageable) {
         log.debug("Request to get all Invoices");
-        return invoiceRepository.findAll(pageable);
+
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+            return invoiceRepository.findAll(pageable);
+        } else {
+            return invoiceRepository.findAllByOrderCustomerUserLogin(
+                    SecurityUtils.getCurrentUserLogin().get(), pageable);
+        }
     }
 
 
@@ -59,7 +67,13 @@ public class InvoiceService {
     @Transactional(readOnly = true)
     public Optional<Invoice> findOne(Long id) {
         log.debug("Request to get Invoice : {}", id);
-        return invoiceRepository.findById(id);
+
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+            return invoiceRepository.findById(id);
+        } else {
+            return invoiceRepository.findOneByIdAndOrderCustomerUserLogin(id,
+                    SecurityUtils.getCurrentUserLogin().get());
+        }
     }
 
     /**
